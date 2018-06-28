@@ -1,0 +1,24 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <%= link_to "Online News", root_path, id: "logo" %>
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to "LifeStyle", "#" %></li>
+        <li><%= link_to "Entertainment", "#" %></li>
+        <li><%= link_to "Tech", "#" %></li>
+        <li><%= link_to "Food", "#" %></li>
+        <li><%= link_to "Sport", "#" %></li>
+        <li><%= link_to "Video", "#" %></li>
+        <li><%= link_to "Cinema", "#" %></li> ||
+        <% if user_signed_in? %>
+         <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+         <li><%= link_to current_user.email, edit_user_registration_path %></li>
+        <% else %>
+         <li><%= link_to "Sign Up", new_user_registration_path %></li>
+         <li><%= link_to "Login", new_user_session_path %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</header>

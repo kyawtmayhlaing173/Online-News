@@ -1,0 +1,14 @@
+<div>  <%= link_to "Create New Post", class: 'btn' %></div>
+<h1>Online News</h1>
+<p>
+  This is the home page for the News
+</p>
+
+
+<% if user_signed_in? %>
+ <li><%= link_to current_user.email, edit_user_registration_path %></li>
+ <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+<% else %>
+ <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-primary' %>
+ <%= link_to "Login", new_user_session_path %>
+<% end %>
