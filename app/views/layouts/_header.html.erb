@@ -10,7 +10,7 @@
         <li><%= link_to "Food", "#" %></li>
         <li><%= link_to "Sport", "#" %></li>
         <li><%= link_to "Video", "#" %></li>
-        <li><%= link_to "Cinema", "#" %></li> ||
+        <li><%= link_to "Cinema", "#" %></li> 
         <% if user_signed_in? %>
          <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
          <li><%= link_to current_user.email, edit_user_registration_path %></li>
