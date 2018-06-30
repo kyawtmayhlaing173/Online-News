@@ -51,11 +51,11 @@ class PostsController < ApplicationController
         flash[:success] = "Micropost created!"
         gravatar_id = @post.id
         gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}"
-        debugger
-        image_tag(gravatar_url, alt: post.title, class: "gravatar")
+        #debugger
+        #image_tag(gravatar_url, alt: @post.title, class: "gravatar")
         render 'posts/show'
       else
-        render 'static_pages/home'
+        render 'static_pages/index'
       end
     end
 
@@ -91,6 +91,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :detail, :User_id)
+      params.require(:post).permit(:title, :detail, :User_id, :picture)
     end
 end

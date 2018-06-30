@@ -1,27 +1,31 @@
 <div>  <%= link_to "Create New Post", new_post_path, class: 'btn' %></div>
 <h1>Online News</h1>
 <%= will_paginate @post%>
-<table border="0">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Title</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
 <% @post.each do |posts| %>
-  <tr>
-    <td><%= gravatar_for posts %></td>
-    <td><%= posts.title %></td>
-    <td><%= posts.detail %></td>
-    <td><%= posts.User.email %></td>
-    <td><span class="timestamp">
-      Posted <%= time_ago_in_words(posts.created_at) %> ago.
-    </span></td>
-
-  </tr>
+<div class="grid-container">
+  <div class="picture">
+    <%= image_tag posts.picture.url, width: 300, height: 200 if posts.picture? %>
+  </div>
+  <div class="title">
+    <%= posts.title %>
+  </div>
+  <div class="posted_b">
+    <p> by <%= posts.User.email %></p>
+  </div>
+  <div class="time">
+    <span class= "timestamp"><p>Posted <%= time_ago_in_words(posts.created_at) %> ago.</p></span>
+  </div>
+  <div class="edit_btn">
+    <%= link_to "edit", "#" ,class: "btn btn-lg btn-primary" %>
+    <% if current_user==posts.User %>
+      <%= link_to "delete", posts, method: :delete,
+                                       data: { confirm: "You sure?" }, class: "btn btn-lg btn-primary" %>
+    <% end %>
+  </div>
+</div>
+<hr>
 <% end %>
-</table>
+
+
 <%= will_paginate @post%>
