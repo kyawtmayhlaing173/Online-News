@@ -8,13 +8,10 @@ module ApplicationHelper
     end
   end
 
-  def life_style_link
-
-  end
-
-  def contact_link
-
-  end
+  def current_class?(test_path)
+    #debugger
+  return 'active' if request.path == test_path
+end
 
   def nav_item_active_if(condition, attributes = {}, &block)
     if condition

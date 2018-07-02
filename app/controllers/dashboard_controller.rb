@@ -11,7 +11,7 @@ class DashboardController < ApplicationController
   end
 
   def tech
-    @post = Post.where("category = ?", "Tech").paginate(page: params[:page], per_page: 10)
+    @post = Post.where("category = ?", "Technology").paginate(page: params[:page], per_page: 10)
   end
 
   def cinema

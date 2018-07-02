@@ -6,13 +6,19 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
+    #debugger
     if params[:search]
-      @posts = Post.search(params[:search]).order("created_at DESC").paginate(page: params[:page], per_page: 10)
+      @post = Post.search(params[:search]).order("created_at DESC").paginate(page: params[:page], per_page: 10)
     else
-      @posts = Post.all.order('created_at DESC')
+      @post = Post.all.order('created_at DESC')
     end
 
+    #if @posts == []
+    #  render 'static_pages/show'
+    #else
+    #debugger
     render 'static_pages/index'
+    #end
   end
 
   # GET /posts/1
@@ -27,8 +33,6 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
-
-    #debugger
     @post = Post.new
   end
 
@@ -58,7 +62,7 @@ class PostsController < ApplicationController
       if (@post.title.empty? || @post.detail.empty?)
         respond_to do |format|
           format.html { render 'posts/new', notice: 'Form cannot be empty' }
-          debugger
+          #debugger
         end
       else
         @post.User_id = current_user.id
@@ -67,6 +71,7 @@ class PostsController < ApplicationController
         #@post = current_user.Post.build(post_params)
         if @post.save
           #flash[:success] = "Micropost created!"
+
           gravatar_id = @post.id
           gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}"
           #debugger

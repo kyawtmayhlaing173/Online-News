@@ -7,10 +7,14 @@
 
 <div class= "form-group">  <%= link_to "Create New Post", new_post_path, class: 'btn btn-default' %></div>
 <h1>Online News</h1>
-<%= will_paginate @posts%>
+<%= will_paginate @post%>
 
 
-<% @posts.each do |posts| %>
+<% if @post == [] %>
+  <br><br>
+  <h2 style="color: #808080">No posts to show for the keyword "<%= params[:search] %>".</h2>
+<% else %>
+<% @post.each do |posts| %>
 <div class="">
 <%= hidden_field_tag :id, posts.id %>
 <%#= link_to posts do %>
@@ -45,6 +49,7 @@
 <%# end %>
 </div>
 <% end %>
+<% end %>
 
 
 <script>
@@ -61,4 +66,4 @@ $('.grid').click(function(event) {
 });
 </script>
 
-<%= will_paginate @posts%>
+<%= will_paginate @post%>
