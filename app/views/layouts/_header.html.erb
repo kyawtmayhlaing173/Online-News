@@ -3,17 +3,20 @@
     <%= link_to "Online News", root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Home", root_path %></li>
-        <li><%= link_to "LifeStyle", "#" %></li>
-        <li><%= link_to "Entertainment", "#" %></li>
-        <li><%= link_to "Tech", "#" %></li>
-        <li><%= link_to "Food", "#" %></li>
-        <li><%= link_to "Sport", "#" %></li>
-        <li><%= link_to "Video", "#" %></li>
-        <li><%= link_to "Cinema", "#" %></li> 
+        <li class="active"><%= link_to "Home", root_path %></li>
+
+        <li><%= link_to "LifeStyle", dashboard_new_path %></li>
+        <li><%= link_to "Entertainment", dashboard_entertainment_path %></li>
+        <li><%= link_to "Tech", dashboard_tech_path %></li>
+        <li><%= link_to "Food", dashboard_food_path %></li>
+        <li><%= link_to "Sport",dashboard_sport_path %></li>
+        <li><%= link_to "Video", dashboard_video_path %></li>
+        <li><%= link_to "Cinema", dashboard_cinema_path %></li>
+        <li></li>
+        <li></li>
         <% if user_signed_in? %>
          <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
-         <li><%= link_to current_user.email, edit_user_registration_path %></li>
+         <li><%= link_to current_user.name, edit_user_registration_path %></li>
         <% else %>
          <li><%= link_to "Sign Up", new_user_registration_path %></li>
          <li><%= link_to "Login", new_user_session_path %></li>
@@ -21,4 +24,14 @@
       </ul>
     </nav>
   </div>
+  <link rel="stylesheet" href="/css/bootstrap.css">
+    <script src="/assets/jquery.js" type="text/javascript"></script>
+    <script src="/assets/jquery_ujs.js" type="text/javascript"></script>
+    <script src="/js/bootstrap.min.js" type="text/javascript"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </header>

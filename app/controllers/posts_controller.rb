@@ -1,12 +1,18 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
   #validates :user_id, presence: true
 
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    if params[:search]
+      @posts = Post.search(params[:search]).order("created_at DESC").paginate(page: params[:page], per_page: 10)
+    else
+      @posts = Post.all.order('created_at DESC')
+    end
+
+    render 'static_pages/index'
   end
 
   # GET /posts/1
@@ -21,6 +27,12 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+
+    #debugger
+    @post = Post.new
+  end
+
+  def category
   end
 
   # POST /posts
@@ -42,20 +54,27 @@ class PostsController < ApplicationController
 
   def create
       #debugger
-
       @post = Post.new(post_params)
-      @post.User_id = current_user.id
-      #debugger
-      #@post = current_user.Post.build(post_params)
-      if @post.save
-        flash[:success] = "Micropost created!"
-        gravatar_id = @post.id
-        gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}"
-        #debugger
-        #image_tag(gravatar_url, alt: @post.title, class: "gravatar")
-        render 'posts/show'
+      if (@post.title.empty? || @post.detail.empty?)
+        respond_to do |format|
+          format.html { render 'posts/new', notice: 'Form cannot be empty' }
+          debugger
+        end
       else
-        render 'static_pages/index'
+        @post.User_id = current_user.id
+        @post.category = params[:category]
+        #debugger
+        #@post = current_user.Post.build(post_params)
+        if @post.save
+          #flash[:success] = "Micropost created!"
+          gravatar_id = @post.id
+          gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}"
+          #debugger
+          #image_tag(gravatar_url, alt: @post.title, class: "gravatar")
+          render 'posts/show'
+        else
+          render 'static_pages/index'
+        end
       end
     end
 
@@ -78,7 +97,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to static_pages_index_path, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -86,11 +105,12 @@ class PostsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
+      #debugger
       @post = Post.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :detail, :User_id, :picture)
+      params.require(:post).permit(:title, :detail, :User_id, :picture, :category)
     end
 end

@@ -1,31 +1,64 @@
-<div>  <%= link_to "Create New Post", new_post_path, class: 'btn' %></div>
-<h1>Online News</h1>
-<%= will_paginate @post%>
+<div class="search">
+  <%= form_tag(posts_path, :method => "get", id: "search-form") do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search Posts" %>
+  <%= submit_tag "Search" %>
+  <% end %>
+</div>
 
-<% @post.each do |posts| %>
-<div class="grid-container">
+<div class= "form-group">  <%= link_to "Create New Post", new_post_path, class: 'btn btn-default' %></div>
+<h1>Online News</h1>
+<%= will_paginate @posts%>
+
+
+<% @posts.each do |posts| %>
+<div class="">
+<%= hidden_field_tag :id, posts.id %>
+<%#= link_to posts do %>
+<div class="grid-container" id="grid-container">
+  <%#= link_to posts, {:style => 'color: #FFFFFF'}  do %>
   <div class="picture">
     <%= image_tag posts.picture.url, width: 300, height: 200 if posts.picture? %>
+    <%# end %>
   </div>
-  <div class="title">
+  <%#= link_to posts do %>
+  <div class="title",  class: 'form-group'>
     <%= posts.title %>
+    <%# end %>
   </div>
+
   <div class="posted_b">
-    <p> by <%= posts.User.email %></p>
+    <p> by <%= posts.User.name %></p>
   </div>
   <div class="time">
     <span class= "timestamp"><p>Posted <%= time_ago_in_words(posts.created_at) %> ago.</p></span>
   </div>
-  <div class="edit_btn">
-    <%= link_to "edit", "#" ,class: "btn btn-lg btn-primary" %>
+  <div class="form-group edit_btn">
+    <%= link_to "Edit", posts ,class: "btn btn-default" %>
     <% if current_user==posts.User %>
-      <%= link_to "delete", posts, method: :delete,
-                                       data: { confirm: "You sure?" }, class: "btn btn-lg btn-primary" %>
+      <%= link_to "Delete", posts, method: :delete,
+                                       data: { confirm: "You sure?" }, class: "btn btn-default" %>
     <% end %>
+    <%= link_to "Read Detail", posts, class: "btn btn-default" %>
   </div>
 </div>
 <hr>
+<%# end %>
+</div>
 <% end %>
 
 
-<%= will_paginate @post%>
+<script>
+$('.grid').click(function(event) {
+  alert ('Success JavaScript')
+
+  //alert($(this))
+  //var new = $("#grid-container").val
+  //alert (new)
+  //alert(Idimp)
+  //var new_path = 'posts/' + posts.id
+
+  //$(location).attr('href','new_path');
+});
+</script>
+
+<%= will_paginate @posts%>

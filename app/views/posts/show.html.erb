@@ -1,23 +1,24 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <%= gravatar_for @post %>
-</p>
+<div class="">
+  <%= hidden_field_tag :post, @post %>
+  <div class="form-group", style>
+    <%= image_tag @post.picture.url, width: 1100, height: 400 if @post.picture? %>
+  </div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
-
-<p>
-  <strong>Detail:</strong>
-  <%= @post.detail %>
-</p>
-
-<p>
-  <strong>User</strong>
-  <%= @post.User_id %>
-</p>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+  <div class="form-group">
+    <h1><%= @post.title %></h1>
+  </div>
+  <br>
+  <div class= "form-group" style="float: right">
+    <p style="font-size: 15px "> Posted by <%= @post.User.name %></p>
+  </div>
+  <br>
+  <div class="form-group">
+    <p style="font-size: 20px"><%= @post.detail %></p>
+  </div>
+  <div class="btn_edit_delete">
+    <%= link_to "Edit", edit_post_path(@post) ,class: "btn btn-default" %>
+    <%= link_to "Back", static_pages_index_path, class: "btn btn-default" %>
+  </div>
+</div>

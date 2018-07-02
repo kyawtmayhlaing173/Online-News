@@ -1,3 +1,65 @@
-// Place all the styles related to the Posts controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.grid-container {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas: "picture title title title" "picture posted_b time ." "picture edit_btn delete_btn .";
+}
+
+.picture {
+  grid-area: picture;
+}
+
+.title {
+  grid-area: title;
+}
+
+.edit_btn {
+  grid-area: edit_btn;
+}
+
+.delete_btn {
+  grid-area: delete_btn;
+}
+
+.posted_b {
+  grid-area: posted_b;
+}
+
+.time {
+  grid-area: time;
+}
+
+.timestamp {
+  color: #777;
+  display: block;
+}
+
+
+.grid-container1 {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas: "title_pic title_pic title_pic title_pic" "title_detail title_detail title_detail title_detail" "detail detail detail detail" "category category category category" "btn_edit_delete btn_edit_delete btn_edit_delete btn_edit_delete";
+}
+
+.title_pic {
+  grid-area: title_pic;
+}
+
+.title_detail {
+  grid-area: title_detail;
+}
+
+.detail {
+  grid-area: detail;
+}
+
+.category {
+  grid-area: category;
+}
+
+.btn_edit_delete {
+  grid-area: btn_edit_delete;
+}

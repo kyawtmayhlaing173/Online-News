@@ -2,6 +2,15 @@ class Post < ApplicationRecord
   belongs_to :User
   mount_uploader :picture, PictureUploader
   validate  :picture_size
+  default_scope -> { order(created_at: :desc) }
+
+
+def self.search(search)
+  #debugger
+  where("title LIKE ?", "%#{search}%")
+  where("detail LIKE ?", "%#{search}%")
+end
+
 
   private
 
