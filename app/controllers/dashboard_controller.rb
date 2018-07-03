@@ -31,6 +31,6 @@ class DashboardController < ApplicationController
   end
 
   def video
-    @post = Post.where("category = ?", "Tech").paginate(page: params[:page], per_page: 10)
+    @post = Post.where("category = ?", "Video").paginate(page: params[:page], per_page: 10)
   end
 end

@@ -2,9 +2,18 @@
 <div class="row">
   <aside class="col-md-4">
     <section class="user_info">
-      <h1>
-        <%= @user.name %>
-      </h1>
+    <h1>Profile</h1>
+  <table>
+  <tr>
+    <td><strong>User Name:</strong></td>
+    <td><%= @user.name %></td>
+  </tr>
+
+  <tr>
+    <td><strong>User Email:</strong></td>
+    <td><%= @user.email%></td>
+  </tr>
+</table>
     </section>
   </aside>
 </div>

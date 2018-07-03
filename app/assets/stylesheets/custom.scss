@@ -20,7 +20,10 @@ $gray-medium-light: #eaeaea;
   box-sizing: border-box;
 }
 
-
+p {
+  font-family: "Times New Roman", Times, serif;
+  line-height: 2;
+}
 
 
 /* header */
@@ -47,10 +50,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 5em;
+  font-size: 3em;
   letter-spacing: -2px;
   margin-bottom: 30px;
-  text-align: center;
+  text-align: left;
 }
 
 $light-gray: #777;
@@ -122,4 +125,15 @@ footer {
 
 .active {
   background-color: black
+}
+
+/* footer */
+.footer {
+  float: right;
+  color: #777;
+}
+
+.post_title {
+  font-weight: bolder;
+  font-style: normal;
 }

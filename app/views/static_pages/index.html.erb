@@ -5,28 +5,35 @@
   <% end %>
 </div>
 
+<% if !current_user.nil?  %>
 <div class= "form-group">  <%= link_to "Create New Post", new_post_path, class: 'btn btn-default' %></div>
+<% end %>
+<br>
 <h1>Online News</h1>
-<%= will_paginate @post%>
+<br>
+<%#= will_paginate @post%>
 
 
 <% if @post == [] %>
   <br><br>
-  <h2 style="color: #808080">No posts to show for the keyword "<%= params[:search] %>".</h2>
+  <h2 style="color: #808080">No posts to show for the keyword "<%= params[:search] %>"</h2>
 <% else %>
 <% @post.each do |posts| %>
-<div class="">
 <%= hidden_field_tag :id, posts.id %>
 <%#= link_to posts do %>
 <div class="grid-container" id="grid-container">
   <%#= link_to posts, {:style => 'color: #FFFFFF'}  do %>
   <div class="picture">
-    <%= image_tag posts.picture.url, width: 300, height: 200 if posts.picture? %>
+    <% if posts.picture? %>
+      <%= image_tag posts.picture.url, width: 300, height: 200 %>
+    <% else %>
+      <%= image_tag "news.jpg", width: 300, height: 200 %>
+    <% end %>
     <%# end %>
   </div>
   <%#= link_to posts do %>
-  <div class="title",  class: 'form-group'>
-    <%= posts.title %>
+  <div class='title form-group post_title'>
+    <p style="font-size: 1.3em;">"<%= posts.title %>"</p>
     <%# end %>
   </div>
 
@@ -37,33 +44,22 @@
     <span class= "timestamp"><p>Posted <%= time_ago_in_words(posts.created_at) %> ago.</p></span>
   </div>
   <div class="form-group edit_btn">
-    <%= link_to "Edit", posts ,class: "btn btn-default" %>
     <% if current_user==posts.User %>
+      <%= link_to "Edit", posts ,class: "btn btn-default" %>
       <%= link_to "Delete", posts, method: :delete,
                                        data: { confirm: "You sure?" }, class: "btn btn-default" %>
     <% end %>
     <%= link_to "Read Detail", posts, class: "btn btn-default" %>
+
+  </div>
+  <div class="delete_btn">
+    <%= posts.category %>
   </div>
 </div>
 <hr>
 <%# end %>
-</div>
 <% end %>
 <% end %>
-
-
-<script>
-$('.grid').click(function(event) {
-  alert ('Success JavaScript')
-
-  //alert($(this))
-  //var new = $("#grid-container").val
-  //alert (new)
-  //alert(Idimp)
-  //var new_path = 'posts/' + posts.id
-
-  //$(location).attr('href','new_path');
-});
-</script>
 
 <%= will_paginate @post%>
+<br><br>

@@ -4,9 +4,11 @@
   <%= submit_tag "Search" %>
   <% end %>
 </div>
+<% if !current_user.nil?  %>
+<div class= "form-group">  <%= link_to "Create New Post", new_post_path, class: 'btn btn-default' %></div>
+<% end %>
+
 <br><br>
-
-
 <h1>Videos</h1>
 <br>
 <%= render 'shared/categorySelect', post: @post %>
