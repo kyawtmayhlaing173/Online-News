@@ -1,9 +1,10 @@
 .grid-container {
   display: grid;
-  height: 100%;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  height: 150px;
+  grid-template-columns: 2fr 2fr 1fr 1fr;
+  grid-template-rows: 0.5fr 0.5fr 0.5fr;
   grid-template-areas: "picture title title title" "picture posted_b time ." "picture edit_btn delete_btn .";
+
 }
 
 .picture {
@@ -14,21 +15,22 @@
   grid-area: title;
 }
 
-.edit_btn {
-  grid-area: edit_btn;
-}
-
 .delete_btn {
   grid-area: delete_btn;
   box-sizing: border-box;
   border: 1px solid black;
-  width: 100px;
+  width: 110px;
   height: 28px;
   background-color: black;
   color: white;
   text-align: center;
   float: right;
-  margin: 0 auto;
+
+}
+
+.edit_btn {
+  grid-area: edit_btn;
+
 }
 
 .posted_b {
@@ -46,4 +48,14 @@
 
 .search {
   float: right;
+}
+
+.image {
+   position: relative; /* for IE 6 */
+}
+
+.text_above_pic {
+   position: absolute;
+   margin-left: 0px;
+   margin-bottom: 100px;
 }

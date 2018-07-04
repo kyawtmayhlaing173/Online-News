@@ -1,6 +1,7 @@
 <div class="search">
   <%= form_tag(posts_path, :method => "get", id: "search-form") do %>
   <%= text_field_tag :search, params[:search], placeholder: "Search Posts" %>
+  <%= hidden_field_tag(:type, "Cinema") %>
   <%= submit_tag "Search" %>
   <% end %>
 </div>

@@ -7,18 +7,32 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     #debugger
-    if params[:search]
-      @post = Post.search(params[:search]).order("created_at DESC").paginate(page: params[:page], per_page: 10)
-    else
-      @post = Post.all.order('created_at DESC')
-    end
+    if params[:search] && !params[:type].equal?(nil)
+      debugger
+      @post = Post.search(params[:search], params[:type]).order("created_at DESC").paginate(page: params[:page], per_page: 10)
+      #debugger
+      case params[:type]
+      when "Entertainment"
+        render 'dashboard/entertainment'
+      when "Lifestyle"
+        render 'dashboard/new'
+      when "Food"
+        render 'dashboard/food'
+      when "Sport"
+        render 'dashboard/sport'
+      when "Technology"
+        render 'dashboard/tech'
+      when "Video"
+        render 'dashboard/video'
+      end
 
-    #if @posts == []
-    #  render 'static_pages/show'
-    #else
-    #debugger
-    render 'static_pages/index'
-    #end
+    elsif params[:search] && params[:type].equal?(nil)
+      @post = Post.search(params[:search], params[:type]).order("created_at DESC").paginate(page: params[:page], per_page: 10)
+      render 'static_pages/index'
+    else
+      @post = Post.all.order('created_at DESC').paginate(page: params[:page], per_page: 10)
+      render 'static_pages/index'
+    end
   end
 
   # GET /posts/1
@@ -28,12 +42,15 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
+    #debugger
     @post = Post.new
   end
 
   # GET /posts/1/edit
   def edit
-    @post = Post.new
+    #debugger
+    @post = Post.find_by(id: params[:id])
+    #debugger
   end
 
   def category
@@ -61,7 +78,8 @@ class PostsController < ApplicationController
       @post = Post.new(post_params)
       if (@post.title.empty? || @post.detail.empty?)
         respond_to do |format|
-          format.html { render 'posts/new', notice: 'Form cannot be empty' }
+          format.html { redirect_to post_new_path, alert: 'Form cannot be empty' }
+          format.json { render :new, status: :ok, location: @post }
           #debugger
         end
       else

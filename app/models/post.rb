@@ -5,10 +5,17 @@ class Post < ApplicationRecord
   default_scope -> { order(created_at: :desc) }
 
 
-def self.search(search)
+def self.search(search, type)
   #debugger
-  where("title LIKE ?", "%#{search}%")
-  where("detail LIKE ?", "%#{search}%")
+  if type == nil
+    where("title LIKE ?", "%#{search}%")
+    #where("detail LIKE ?", "%#{search}%")
+  #debugger
+ else
+    where("title LIKE ?", "%#{search}%")
+    #where("detail LIKE ?", "%#{search}%")
+    where("category = ?", "#{type}")
+  end
 end
 
 

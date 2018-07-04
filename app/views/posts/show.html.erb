@@ -1,7 +1,6 @@
 <p id="notice"><%= notice %></p>
-
+<%= hidden_field_tag :id, @post.id %>
 <div class="">
-  <%= hidden_field_tag :post, @post %>
   <div class="form-group", style>
     <%= image_tag @post.picture.url, width: 1000, height: 350 if @post.picture? %>
   </div>
@@ -11,7 +10,7 @@
   </div>
   <br>
   <div class= "form-group" style="float: right">
-    <p style="font-size: 15px "> Posted by <%= @post.User.name %></p>
+    <p style="font-size: 15px; color: #777 "> Posted by <%= @post.User.name %></p>
   </div>
   <br><br>
   <div class="form-group">
@@ -20,7 +19,7 @@
   </div>
   <br><br>
   <div class="btn_edit_delete">
-    <%= link_to "Edit", edit_post_path(@post) ,class: "btn btn-default" %>
+    <%= link_to "Edit", edit_post_path ,class: "btn btn-default" %>
     <%= link_to "Back", static_pages_index_path, class: "btn btn-default" %>
   </div>
 </div>
