@@ -8,8 +8,9 @@ class PostsController < ApplicationController
   def index
     #debugger
     if params[:search] && !params[:type].equal?(nil)
-      debugger
+      #debugger
       @post = Post.search(params[:search], params[:type]).order("created_at DESC").paginate(page: params[:page], per_page: 10)
+
       #debugger
       case params[:type]
       when "Entertainment"

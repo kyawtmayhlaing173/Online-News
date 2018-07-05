@@ -9,12 +9,10 @@ def self.search(search, type)
   #debugger
   if type == nil
     where("title LIKE ?", "%#{search}%")
-    #where("detail LIKE ?", "%#{search}%")
-  #debugger
+    where("detail LIKE ?", "%#{search}%")
  else
-    where("title LIKE ?", "%#{search}%")
-    #where("detail LIKE ?", "%#{search}%")
-    where("category = ?", "#{type}")
+   #debugger
+    where("title LIKE ?", "%#{search}%").where("category = ?", "#{type}")
   end
 end
 
