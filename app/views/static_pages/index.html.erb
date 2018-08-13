@@ -40,7 +40,7 @@
   </div>
 
   <div class="posted_b">
-    <p style="color: #777"> by <%= posts.User.name %>  .  Posted <%= time_ago_in_words(posts.created_at) %> ago.</p>
+    <p style="color: #777"> by <%= posts.User.name %>  .  Posted <%= time_ago_in_words(posts.updated_at) %> ago.</p>
   </div>
 
   <div class="edit_btn">
@@ -57,5 +57,7 @@
 <% end %>
 <% end %>
 
-<%= will_paginate @post%>
+<div class: 'paginate'>
+  <%= will_paginate @post, class: "paginate" %>
+</div>
 <br><br>

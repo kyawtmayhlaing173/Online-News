@@ -2,7 +2,7 @@ class Post < ApplicationRecord
   belongs_to :User
   mount_uploader :picture, PictureUploader
   validate  :picture_size
-  default_scope -> { order(created_at: :desc) }
+  default_scope -> { order(updated_at: :desc) }
 
 
 def self.search(search, type)

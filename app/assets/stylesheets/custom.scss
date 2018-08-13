@@ -1,6 +1,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+
 .gravatar {
   float : left;
   margin-right: 10px;
@@ -138,4 +139,14 @@ footer {
 .post_title {
   font-weight: bolder;
   font-style: normal;
+}
+
+.paginate{
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    margin: 0 4px;
 }

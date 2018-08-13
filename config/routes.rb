@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :admins
   resources :posts
   get 'static_pages/home'
   get 'users/new'
